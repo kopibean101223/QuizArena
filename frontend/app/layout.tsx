@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "My Project",
+  title: "QuizArena",
   description: "Next.js + FastAPI + LangChain + Socket.IO app",
 };
 
