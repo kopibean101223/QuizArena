@@ -1,0 +1,23 @@
+# Env
+.env
+.env.local
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+
+# Python
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.venv/
+backend/venv/
+backend/*.egg-info/
+backend/app/generated/
+
+# Prisma
+backend/prisma/migrations/
+
+# OS
+.DS_Store
