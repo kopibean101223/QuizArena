@@ -52,7 +52,7 @@ export default async function middleware(request: NextRequest) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
-      .eq('id', user.id)
+      .eq('user_id', user.id)
       .maybeSingle()
 
     if (profile?.role === 'teacher') {
@@ -71,6 +71,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api/backend|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api/backend|callback|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

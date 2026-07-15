@@ -26,3 +26,66 @@ export async function loginUserAndFetchRole(email: string, password: string) {
 
   return profile.role 
 }
+
+export const loginWithGoogle = async () => {
+  const supabase = createBrowserSupabaseClient()
+  
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'http://localhost:3000/callback',
+      queryParams: {
+        prompt: 'select_account',
+      },
+    },
+  })
+
+  if (error) {
+    throw error
+  }
+}
+
+export async function getUserRole() {
+  const supabase = createBrowserSupabaseClient()
+  
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+
+  const { data: profile, error } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('user_id', user.id)
+    .single()
+
+  if (error || !profile?.role) {
+    return null 
+  }
+
+  return profile.role
+}
+
+export async function updateUserRole(role: 'student' | 'teacher') {
+  const supabase = createBrowserSupabaseClient()
+  
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error("User not authenticated")
+
+  const googleFullName = user.user_metadata?.full_name || user.user_metadata?.name || ''
+  const firstName = googleFullName.split(' ')[0] || (user.email ? user.email.split('@')[0] : 'User')
+
+  const { error } = await supabase
+    .from('profiles')
+    .upsert({ 
+      user_id: user.id, 
+      role: role,
+      username: firstName,
+      created_at: new Date().toISOString()
+    })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return role
+}
