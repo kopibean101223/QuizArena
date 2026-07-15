@@ -1,4 +1,4 @@
-# My Project
+#QuizArena
 
 Full-stack app: **Next.js** (frontend) + **Python/FastAPI** (backend), **PostgreSQL** via **Prisma ORM**, **LangChain** for AI logic, **Socket.IO** for realtime chat, styled with **TailwindCSS**.
 
