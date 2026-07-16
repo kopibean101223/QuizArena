@@ -34,16 +34,14 @@ export default function ChooseRolePage() {
           <button 
             onClick={() => handleRoleSelection('student')}
             disabled={isUpdating}
-            className="w-full py-3.5 bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] rounded-xl font-semibold transition-colors disabled:opacity-70"
-          >
+         className="w-full py-12 bg-[url('/jaja.jpg')] bg-cover bg-center text-white rounded-xl font-bold transition-all hover:opacity-90 disabled:opacity-70 shadow-md">
             {isUpdating ? 'Setting up...' : 'I am a Student'}
           </button>
           
           <button 
             onClick={() => handleRoleSelection('teacher')}
             disabled={isUpdating}
-            className="w-full py-3.5 bg-[#F0FDF4] hover:bg-[#DCFCE7] text-[#15803D] rounded-xl font-semibold transition-colors disabled:opacity-70"
-          >
+         className="w-full py-12 bg-[url('/etangaso.jpg')] bg-cover bg-center text-white rounded-xl font-bold transition-all hover:opacity-90 disabled:opacity-70 shadow-md" >
             {isUpdating ? 'Setting up...' : 'I am a Teacher'}
           </button>
         </div>

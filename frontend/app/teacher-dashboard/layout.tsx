@@ -1,5 +1,5 @@
-import Header from '@/components/ui/Header';
-import Footer from '@/components/ui/Footer';
+import Header from '@/components/ui/teacher-dashboard/Header';
+import Footer from '@/components/ui/teacher-dashboard/Footer';
 
 export default function TeacherLayout({
   children,

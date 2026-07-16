@@ -22,7 +22,7 @@ export default function CreateQuizPage() {
   const [teamSize, setTeamSize] = useState<string>("3vs3");
 
   const handleNewSection = () => console.log("Create New Section clicked");
-  const handleBrowseBank = () => console.log("Browse Bank clicked");
+  const handleBrowseBank = () => router.push('/teacher-dashboard/question-bank');
   const handleUploadSyllabus = () => console.log("Upload Syllabus clicked");
   const handleCancel = () => console.log("Cancel clicked - navigate back");
   const router = useRouter();
@@ -134,7 +134,7 @@ router.push('/teacher-dashboard/review-question')
                 <div className="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center">
                   <Folder size={20} />
                 </div>
-                <h3 className="fw-semibold text-gray-900">Select from Question Bank</h3>
+                <h3 className="fw-semibold text-gray-900">Build Custom Questions</h3>
               </div>
               <p className="text-gray-500 fs-sm">Choose from previously validated algorithmic logic and math questions.</p>
             </div>

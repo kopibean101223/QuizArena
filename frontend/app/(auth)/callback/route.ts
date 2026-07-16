@@ -24,6 +24,7 @@ export async function GET(request: Request) {
       if (profile?.role === 'teacher') {
         return NextResponse.redirect(`${origin}/teacher-dashboard`)
       } else if (profile?.role === 'student') {
+        /*ROUTE NG STUDENT*/ 
         return NextResponse.redirect(`${origin}/student-dashboard`)
       } else {
         
