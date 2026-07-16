@@ -2,6 +2,8 @@
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import AuthLayout from '../../../components/AuthLayout';
+import { useRouter } from 'next/navigation'
+import { createBrowserSupabaseClient } from '@/lib/supabase/client'
 
 export default function QuizArenaSignUp() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ export default function QuizArenaSignUp() {
     agreeTerms: false,
     agreePrivacy: false,
   });
+const router = useRouter();
 
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -227,12 +230,15 @@ export default function QuizArenaSignUp() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-xs font-semibold text-slate-400">
-            Already have an account?{' '}
-            <a href="#signin" className="text-indigo-600 hover:underline font-bold">
-              Sign In
-            </a>
-          </p>  
+          <p className="text-xs text-gray-500">
+            Don't have an account?{' '}
+            <button 
+              onClick={() => router.push('/login')} // Regster PAGE here
+              className="text-[#3A2DD3] hover:underline font-medium"
+            >
+              Create Account
+            </button>
+          </p>
         </div>
 
       </div>
