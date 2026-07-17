@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,14 +7,70 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Font Family */
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Font Weights */
+  --font-regular: 400;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Font Sizes */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
 }
 
 body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
   color: var(--foreground);
   background: var(--background);
-} 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 @layer components {
+  .font-global {
+    font-family: var(--font-sans);
+  }
+
+  .fw-regular {
+    font-weight: var(--font-regular);
+  }
+
+  .fw-semibold {
+    font-weight: var(--font-semibold);
+  }
+
+  .fw-bold {
+    font-weight: var(--font-bold);
+  }
+
+
+  .fs-xs {
+    font-size: var(--text-xs);
+  }
+  
+  .fs-sm {
+    font-size: var(--text-sm);
+  }
+
+  .fs-base {
+    font-size: var(--text-base);
+  }
+
+  .fs-2xl {
+    font-size: var(--text-2xl);
+  }
+
+  /* Decorative backgrounds */
   .bg-decor-left {
     background-image: 
       radial-gradient(circle at 10% 90%, rgba(102, 211, 177, 0.6) 0%, rgba(102, 211, 177, 0.6) 10%, transparent 11%),

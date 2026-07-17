@@ -34,36 +34,59 @@ export default async function middleware(request: NextRequest) {
     }
   )
 
- 
   const { data: { user } } = await supabase.auth.getUser()
-
 
   const url = request.nextUrl.clone()
   const isAuthRoute = url.pathname === '/login' || url.pathname === '/register'
+  const isRoleRoute = url.pathname === '/role'
 
-  
+ 
   if (!user && !isAuthRoute) {
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
   
-  if (user && isAuthRoute) {
+  if (user) {
+    
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
-      .eq('id', user.id)
+      .eq('user_id', user.id)
       .maybeSingle()
 
-    if (profile?.role === 'teacher') {
-      url.pathname = '/teacher-dashboard'
-    } else if (profile?.role === 'student') {
-      url.pathname = '/student-dashboard'
-    } else {
-      url.pathname = '/dashboard' 
+
+    if (!profile) {
+      if (!isRoleRoute) {
+        url.pathname = '/role'
+        return NextResponse.redirect(url)
+      }
+      return response 
+    }
+    if (profile && isRoleRoute) {
+      url.pathname = profile.role === 'teacher' ? '/teacher-dashboard' : 
+                     profile.role === 'student' ? '/student-dashboard' : '/dashboard'
+      return NextResponse.redirect(url)
     }
 
-    return NextResponse.redirect(url)
+    if (url.pathname.startsWith('/teacher-dashboard') && profile.role !== 'teacher') {
+      url.pathname = profile.role === 'student' ? '/student-dashboard' : '/dashboard'
+      url.searchParams.set('error', 'unauthorized_teacher')
+      return NextResponse.redirect(url)
+    }
+
+    if (url.pathname.startsWith('/student-dashboard') && profile.role !== 'student') {
+      url.pathname = profile.role === 'teacher' ? '/teacher-dashboard' : '/dashboard'
+      url.searchParams.set('error', 'unauthorized_student')
+      return NextResponse.redirect(url)
+    }
+
+
+    if (isAuthRoute) {
+      url.pathname = profile.role === 'teacher' ? '/teacher-dashboard' : 
+                     profile.role === 'student' ? '/student-dashboard' : '/dashboard'
+      return NextResponse.redirect(url)
+    }
   }
 
   return response
@@ -71,6 +94,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api/backend|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api/backend|callback|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
