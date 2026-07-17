@@ -41,7 +41,7 @@ export default function ChooseRolePage() {
           <button 
             onClick={() => handleRoleSelection('teacher')}
             disabled={isUpdating}
-         className="w-full py-12 bg-[url('/etangaso.jpg')] bg-cover bg-center text-white rounded-xl font-bold transition-all hover:opacity-90 disabled:opacity-70 shadow-md" >
+         className="w-full py-12 bg-[url('/ received.jpg')] bg-cover bg-center text-white rounded-xl font-bold transition-all hover:opacity-90 disabled:opacity-70 shadow-md" >
             {isUpdating ? 'Setting up...' : 'I am a Teacher'}
           </button>
         </div>
